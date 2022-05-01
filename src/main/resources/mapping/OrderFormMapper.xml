@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wsk.dao.OrderFormMapper" >
+  <resultMap id="BaseResultMap" type="com.wsk.pojo.OrderForm" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="modified" property="modified" jdbcType="TIMESTAMP" />
+    <result column="display" property="display" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="context" property="context" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="table">
+    orderform
+  </sql>
+
+  <sql id="all" >
+    id, modified, display, uid, address, context
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="all" />
+    from <include refid="table"/>
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="getCounts" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+    select count(id)
+    from <include refid="table"/>
+    where uid = #{uid,jdbcType=INTEGER} and display = 1
+  </select>
+  <select id="selectByUid" resultMap="BaseResultMap">
+    select
+    <include refid="all"/>
+    from <include refid="table"/>
+    where uid = #{0} and display = 1 order by id DESC
+    limit #{1},10
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from <include refid="table"/>
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wsk.pojo.OrderForm" >
+    insert into <include refid="table"/> (id, modified, display,
+      uid, address, context
+      )
+    values (#{id,jdbcType=INTEGER}, #{modified,jdbcType=TIMESTAMP}, #{display,jdbcType=INTEGER}, 
+      #{uid,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{context,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wsk.pojo.OrderForm" >
+    insert into <include refid="table"/>
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="modified != null" >
+        modified,
+      </if>
+      <if test="display != null" >
+        display,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="context != null" >
+        context,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="modified != null" >
+        #{modified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="display != null" >
+        #{display,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="context != null" >
+        #{context,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wsk.pojo.OrderForm" >
+    update <include refid="table"/>
+    <set >
+      <if test="modified != null" >
+        modified = #{modified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="display != null" >
+        display = #{display,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="context != null" >
+        context = #{context,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wsk.pojo.OrderForm" >
+    update
+    <include refid="table"/>
+    set modified = #{modified,jdbcType=TIMESTAMP},
+      display = #{display,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      context = #{context,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

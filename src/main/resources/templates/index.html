@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>C2C二手交易平台</title>
+    <link rel="icon" href="/img/page_icon.png"/>
+    <link th:href="@{/css/home_page/home_page_circle.css}" rel="stylesheet"/>
+    <link th:href="@{/css/home_page/header_and_nav.css}" rel="stylesheet"/>
+    <link th:href="@{/css/home_page/bottom_ifon_and_feature.css}" rel="stylesheet"/>
+    <script th:src="@{/js/jquery-1.3.2.min.js}"></script>
+    <script th:src="@{/js/home/home_page_circle.js}"></script>
+    <script th:src="@{/js/home/header_model_js.js}"></script>
+</head>
+<body>
+<!--整体结构很明确，就是轮播图的位置用了绝对位置感觉很不好，
+然后接下来那些都用了绝对位置，很尴尬-->
+<header th:include="header :: copy"></header>
+<div th:include="short_nav_show :: short_nav_show" class="short_nav_show"></div>
+<nav th:include="my_nav :: my_nav" class="my_nav"></nav>
+<div th:include="personal_nav :: personal_nav" class="personal_nav"></div>
+<div class="my_slider">
+    <div class="my_slide">
+        <h1>华为 - 更美好的全联接世界</h1>
+        <p>
+            本产品全国联保，享受三包服务，质保期为：一年质保
+            如因质量问题或故障，凭厂商维修中心或特约维修点的质量检测证明，享受7日内退货，15日内换货，15日以上在质保期内享受免费保修等三包服务！
+            (注:如厂家在商品介绍中有售后保障的说明,则此商品按照厂家说明执行售后保障服务。) 您可以查询本品牌在各地售后服务中心的联系方式，<a href="http://www.huawei.com/cn/">请点击这儿查询......</a>
+            </p>
+        <div class="slide_img">
+            <img src="/img/home/58a7b127N54121e80.jpg" style="width: 400px;height: 270px"/>
+        </div>
+    </div>
+    <div class="my_slide">
+        <h1>Apple MacBook Air 13.3英寸笔记本电脑</h1>
+        <p>
+            MacBook Air 配置最高可达8GB的内存，第五代Inter Core处理器，Thunderbolt2端口，
+            一些列强大内置APP，以及满足一天所需的电池使用时间。它纤薄、轻巧、却又十分耐用。
+        非常适合随身携带。而它的强劲性能，又能帮助你轻松应对各项事务！</p>
+        <div class="slide_img">
+            <img src="/img/home/57b12a31N8f4f75a3.jpg" style="width: 400px;height: 270px"/>
+        </div>
+    </div>
+    <div class="my_slide">
+        <h1>美的（Midea）电磁炉WK2102T</h1>
+        <p>
+            美的WK2102T，精准大火力，快享美味，六大烹饪功能，四大辅助功能，4D防水技术，防泼防溅，超大触摸键，简易更耐用。
+        </p>
+        <div class="slide_img">
+            <img src="/img/home/583930a6N11a0352c.jpg" style="width: 400px;height: 270px"/>
+        </div>
+    </div>
+    <div class="my_slide">
+        <h1>卡地亚(Cartier)手表W6920071 </h1>
+        <p>
+            表径：约33毫米 表壳厚度：约6.96毫米 表壳材质：不锈钢 表盘颜色：白色 表盘形状：圆形 表镜材质：蓝宝石玻璃（人工合成） 表冠材质：不锈钢 表带颜色：银色 表带材质：不锈钢 表扣类型：蝴蝶扣 表扣材质：不锈钢 防水深度：30米
+        </p>
+        <div class="slide_img">
+            <img src="/img/home/rBEQYFGbHbIIAAAAAAKw4BQkpv4AABqfgAhcuwAArD4706.jpg" style="width: 400px;height: 270px"/>
+        </div>
+    </div>
+    <div class="my_slide current">
+        <h1>罗技G413机械游戏键盘</h1>
+        <p>
+            即使是非常激烈的游戏过程，借助防冲突功能的保护，键盘仍能记录下输入的指令。
+            26 键无冲功能让您能够以任意顺序按下任意数量的按键，以准确实现所需功能。 </p>
+        <div class="slide_img">
+            <img src="/img/home/58f834abNfcc1c117.jpg" style="width: 400px;height: 270px"/>
+        </div>
+    </div>
+    <div class="left_border">
+        <span class="left_turn"></span>
+    </div>
+    <div class="right_border">
+        <span class="right_turn"></span>
+    </div>
+</div>
+<div class="featured_products">
+    <h2>精选的商品</h2>
+    <figure class="product" th:each="o:${shopInformationBean}">
+        <div class="product_img_div">
+            <img src="/img/home/feature_prodects/cont1.jpg" class="show_img" th:src="${o.image}"/>
+        </div>
+        <p class="show_tip" th:text="${o.remark}"></p>
+        <input class="product_id" type="hidden" th:value="${o.id}"/>
+        <a class="product_name" th:href="'/selectById.do?id='+${o.id}" th:text="${o.name}" th:title="${o.name}">wsk1103</a><br/>
+        <!--<span class="product_name" th:text="${o.name}" th:value="${o.id}">Big block Lether Bag</span><br/>-->
+        <span class="product_cost" th:text="'￥'+${o.price}+'元'">$350.00</span><br/><br/>
+        <span class="buy product_1" th:value="${o.id}">加入购物车</span>
+    </figure>
+    <!--<div class="product">-->
+        <!--<img src="img/home/feature_prodects/cont2.jpg" width="100%"/>-->
+        <!--<span class="product_name">Big block Lether Bag</span>-->
+        <!--<span class="product_cost">$350.00</span><br/><br/>-->
+        <!--<span class="buy product_2">Buy</span>-->
+    <!--</div>-->
+    <!--<div class="product">-->
+        <!--<img src="img/home/feature_prodects/cont4.jpg" width="100%"/>-->
+        <!--<span class="product_name">Big block Lether Bag</span>-->
+        <!--<span class="product_cost">$350.00</span><br/><br/>-->
+        <!--<span class="buy product_3">Buy</span>-->
+    <!--</div>-->
+    <!--<div class="product">-->
+        <!--<img src="img/home/feature_prodects/cont4.jpg" width="100%"/>-->
+        <!--<span class="product_name">Big block Lether Bag<br/></span>-->
+        <!--<span class="product_cost">$350.00</span><br/><br/>-->
+        <!--<span class="buy product_4">Buy</span>-->
+    <!--</div>-->
+    <!--<div class="product">-->
+        <!--<img src="img/home/feature_prodects/cont1.jpg" width="100%"/>-->
+        <!--<span class="product_name">Big block Lether Bag</span>-->
+        <!--<span class="product_cost">$350.00</span><br/><br/>-->
+        <!--<span class="buy product_5">Buy</span>-->
+    <!--</div>-->
+</div>
+<div class="home_page_info">
+    <div class="bottom_info">
+        <h2>
+            关于我们
+        </h2>
+        <p>
+            该网站成立与2017年，是仲恺农业工程学院最大的校内二手交易网站。拥有2000万注册用户和10万注册企业和合作伙伴。日常在线活动用户约90万。交易金额最大可达1亿/日。
+        </p>
+    </div>
+    <div class="bottom_info">
+        <h2>
+            团队信息
+        </h2>
+        <p>该网站由WSK和XYF协力完成。有疑问可以发送问题至邮箱 wushukai1103@gmail.com
+        </p>
+    </div>
+    <div class="bottom_info">
+        <h2>
+            版权声明
+        </h2>
+        <p>本网站社区发布的所有信息，都视为发布者同意本网站免费予以使用；同时本网站认为其发布的信息有侵权、违法等行为的，有权予以修改、删除或通知发布者予以纠正的权利，发布者不得阻止或拒绝。
+        </p>
+    </div>
+</div>
+<footer>
+    <p>Copyright © 2017-2200.Company name All rights reserved.<a href="/"></a></p>
+</footer>
+</body>
+</html>

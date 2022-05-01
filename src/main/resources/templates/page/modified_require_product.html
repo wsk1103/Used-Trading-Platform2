@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>修改求购商品</title>
+    <link rel="icon" href="/img/page_icon.png"/>
+    <link rel="stylesheet" href="/css/home_page/header_and_nav.css"/>
+    <link rel="stylesheet" href="/css/product/require_product.css"/>
+    <script src="/js/jquery-1.3.2.min.js"></script>
+    <script src="/js/home/header_model_js.js"></script>
+    <script src="/js/mall/type_list_obj.js"></script>
+    <script src="/js/publish/publish_product.js"></script>
+</head>
+<body>
+<header th:include="header :: copy"></header>
+<div th:include="short_nav_show :: short_nav_show" class="short_nav_show"></div>
+<nav th:include="my_nav :: my_nav" class="my_nav"></nav>
+<div th:include="personal_nav :: personal_nav" class="personal_nav"></div>
+<!--name,sort,quantity,price,remark,token,-->
+<div class="top_content">
+    <div class="publish_product_div">
+        <form action="/publishUserWant.do" method="post">
+            <input type="hidden" th:value="${token}" name="token"/>
+            <div class="publish_one_par">
+                <div class="publish_title">
+                    <h3>商品名</h3>
+                </div>
+                <div class="publish_content">
+                    <input type="text" class="title_input" name="name" required="required" th:value="${userWant.name}"
+                           />
+                </div>
+            </div>
+            <div class="publish_one_par">
+                <div class="publish_title">
+                    <h3>数量</h3>
+                </div>
+                <div class="publish_content">
+                    <input type="text" class="count_input" name="quantity" required="required"
+                           th:value="${userWant.quantity}" />
+                </div>
+            </div>
+            <div class="publish_one_par">
+                <div class="publish_title">
+                    <h3>单价</h3>
+                </div>
+                <div class="publish_content cost_content">
+                    <input type="text" class="cost_input" name="price" required="required" th:value="${userWant.price}"
+                           />
+                    <span>RMB(.00)</span>
+                </div>
+            </div>
+            <div class="publish_one_par">
+                <div class="publish_title">
+                    <h3>详情</h3>
+                </div>
+                <div class="publish_content">
+                    <textarea class="detail_textarea" maxlength="122"
+                              placeholder="留下联系方式,方便卖家联系" name="remark" required="required"
+                              th:value="${userWant.remark}" th:text="${userWant.remark}"></textarea>
+                </div>
+            </div>
+            <div class="publish_one_par">
+                <div class="publish_title">
+                    <h3>分类</h3>
+                </div>
+                <div class="publish_content">
+                    <select class="choose_first_type">
+                        <option id="type_1" selected="selected">数码科技</option>
+                        <option id="type_2">影音家电</option>
+                        <option id="type_3">鞋服配饰</option>
+                        <option id="type_4">运动代步</option>
+                        <option id="type_5">书籍文具</option>
+                        <option id="type_6">其他</option>
+                    </select><span class="to_left">--</span>
+                    <select class="choose_second_type">
+                        <option>三成</option>
+                        <option>四成</option>
+                        <option>五成</option>
+                        <option>六成</option>
+                        <option>七成</option>
+                        <option>八成</option>
+                        <option>九成</option>
+                        <option>全新</option>
+                    </select><span class="to_left">--</span>
+                    <select class="choose_third_type" name="sort">
+                        <option>三成</option>
+                        <option>四成</option>
+                        <option>五成</option>
+                        <option>六成</option>
+                        <option>七成</option>
+                        <option>八成</option>
+                        <option>九成</option>
+                        <option>全新</option>
+                    </select>
+                </div>
+                <br/>
+                <!--<div th:value="${sort}" th:text="${sort}"></div>-->
+            </div>
+            <div class="submit_content_div">
+                <input type="submit" value="提交" class="submit_input"/>
+            </div>
+        </form>
+    </div>
+    <footer>
+        <p>Copyright © 2017.Company name All rights reserved.<a href="/"></a></p>
+    </footer>
+</div>
+</body>
+</html>

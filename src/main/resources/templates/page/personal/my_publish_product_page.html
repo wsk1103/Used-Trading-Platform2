@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>发布的商品</title>
+    <link rel="icon" href="/img/page_icon.png"/>
+    <link rel="stylesheet" href="/css/home_page/header_and_nav.css"/>
+    <link href="/css/personal/my_publish_product.css" rel="stylesheet"/>
+    <script src="/js/jquery-1.3.2.min.js"></script>
+    <script src="/js/home/header_model_js.js"></script>
+    <script>
+        $(function () {
+            $('.update_publish').click(function () {
+                var id = $(this).attr('value');
+//                alert(id);
+                window.location.href = '/modifiedMyPublishProduct.do?id=' + id;
+            });
+            $('.delete_publish').click(function () {
+                var r = confirm("确定删除？？？？")
+                if (r == true) {
+                    var id = $(this).attr('value');
+//                    alert(id);
+                    window.location.href="/deleteShop.do?id="+id;
+                }
+            });
+            $('.detail_product_name').click(function () {
+                var id = $(this).attr('value');
+                window.location.href='/selectById.do?id='+id;
+            });
+        });
+
+    </script>
+    <style>
+        .product_content_div .detail_product .delete_and_update {
+            width: 100%;
+            display: block;
+            padding-bottom: 0%;
+            position: relative;
+            text-align: inherit;
+        }
+
+        .product_content_div .detail_product .delete_and_update img.update_publish {
+            width: 8%;
+            padding-bottom: 0;
+            position: relative;
+            margin-right: 30%;
+        }
+
+        .product_content_div .detail_product .delete_and_update img.delete_publish {
+            width: 8%;
+            padding-bottom: 0;
+            margin-left: 30%;
+        }
+
+        .product_content_div .detail_product .delete_and_update img:hover {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<header th:include="header :: copy"></header>
+<div th:include="short_nav_show :: short_nav_show" class="short_nav_show"></div>
+<nav th:include="my_nav :: my_nav" class="my_nav"></nav>
+<div th:include="personal_nav :: personal_nav" class="personal_nav"></div>
+<div class="temp_content">
+    <!--注意需要加一个br，不然会在同一行显示-->
+    <div class="product_content_div">
+        <figure class="detail_product" th:each="o:${shopInformationBean}">
+            <div class="product_img_div">
+                <img src="/img/home/feature_prodects/cont2.jpg" th:src="${o.getImage()}" class="show_img"/>
+            </div>
+            <p class="show_tip" th:text="${o.remark}"></p>
+            <span class="detail_product_name" th:text="${o.getName()}" th:value="${o.id}">Big block Lether Bag</span><br/>
+            <span class="detail_product_cost" th:text="'￥'+${o.getPrice()}">$350.00</span><br/>
+            <span class="detail_type" th:text="${o.getSort()}">数码科技-手机-苹果</span>
+            <div class="delete_and_update"><img src="/img/pencil.jpg" class="update_publish" th:value="${o.getId()}"/>
+                <img src="/img/delete_icon.jpg" class="delete_publish" th:value="${o.getId()}"/></div>
+        </figure>
+    </div>
+    <div class="pagination_div">
+        <a class="pagination_lt">&lt;</a>
+        <ul>
+            <li><a>1</a></li>
+            <li><a>2</a></li>
+            <li><a>3</a></li>
+            <li><a>4</a></li>
+            <li><a>5</a></li>
+        </ul>
+        <a class="pagination_gt">&gt;</a>
+    </div>
+    <footer>
+        <p>Copyright © 2017.Company name All rights reserved.<a href="/"></a></p>
+    </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: my
+  main:
+    allow-bean-definition-overriding: true
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    default-property-inclusion: non_null
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/c2c
+    username: root
+    password: 123456
+  thymeleaf:
+    cache: false
+    suffix: .html
+    mode: HTML5
+    encoding: UTF-8
+#  mvc:
+#    static-path-pattern: classpath:/resources/static/**
+#  resources:
+#    static-locations: classpath:/resources/static/**
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+
+logging:
+  level:
+    root: info
+    com:
+      wsk: debug
+      netflix:
+        discovery:
+          shared:
+            resolver:
+              aws: error
+#  file: ./logs/${spring.application.name}.log
+#  logback:
+#    rollingpolicy:
+#      max-history: 60
+#  path: ./logs

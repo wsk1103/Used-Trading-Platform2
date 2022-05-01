@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>商品详情</title>
+    <link rel="icon" href="/img/page_icon.png"/>
+    <link href="/css/home_page/header_and_nav.css" rel="stylesheet"/>
+    <link href="/css/product/product_info.css" rel="stylesheet"/>
+    <script src="/js/jquery-1.12.4.js"></script>
+    <script src="/js/home/header_model_js.js"></script>
+    <script src="/js/publish/product_info.js"></script>
+</head>
+<body>
+<header th:include="header :: copy"></header>
+<div th:include="short_nav_show :: short_nav_show" class="short_nav_show"></div>
+<nav th:include="my_nav :: my_nav" class="my_nav"></nav>
+<div th:include="personal_nav :: personal_nav" class="personal_nav"></div>
+<div class="top_content">
+    <div class="publish_product_div">
+        <div class="product_img_div">
+            <img src="/img/home/p4.jpeg" class="product_img" th:src="${shopInformation.image}"/>
+        </div>
+        <div class="product_info_div">
+            <span class="what_info">商品名：</span>
+            <input type="hidden" th:value="${shopInformation.id}" class="id"/>
+            <span class="info_content" th:text="${shopInformation.name}">苹果6s</span><br/>
+            <span class="what_info">成色：</span>
+            <span class="info_content" th:text="${shopInformation.level}+'成'">7成</span><br/>
+            <span class="what_info">数量：</span>
+            <span class="info_content" th:text="${shopInformation.quantity}">3</span><br/>
+            <span class="what_info">单价：</span>
+            <span class="info_content" th:text="'$'+${shopInformation.price}">20.00</span><br/>
+            <span class="what_info">详情：</span>
+            <span class="info_content" th:text="${shopInformation.remark}">这是一个商品，联系电话1111111111</span><br/>
+            <span class="what_info">分类：</span>
+            <span class="info_content" th:text="${sort}">数码科技-手机-苹果</span><br/>
+            <button class="buy_button" th:value="${shopInformation.id}">加入购物车</button>
+        </div>
+        <div class="publish_comment">
+            <span>留言：</span><br/><br/>
+            <input type="hidden" th:value="${token}" class="token"/>
+            <textarea class="comment_textarea" maxlength="122" placeholder="本次最多填写122个字" name="comment"></textarea>
+            <button class="send_comment_button">发表</button>
+        </div>
+        <div class="comment_content">
+            <div class="one_comment" th:each="o:${shopContextBeans}">
+                <span class="username" th:text="'用户：'+${o.username}">用户：1211110</span>
+                <span class="time" th:with="time = ${o.modified}"
+                      th:text="'发表于 '+${#dates.format(time,'yyyy-MM-dd HH:mm:ss')}">发表于：2016-03-01 22:22:22</span>
+                <p class="content" th:text="${o.context}">123456789123</p>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>Copyright © 2017.Company name All rights reserved.<a href="/"></a></p>
+    </footer>
+</div>
+</body>
+</html>

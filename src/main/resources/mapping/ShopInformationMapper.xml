@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wsk.dao.ShopInformationMapper" >
+  <resultMap id="BaseResultMap" type="com.wsk.pojo.ShopInformation" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="modified" property="modified" jdbcType="TIMESTAMP" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="display" property="display" jdbcType="INTEGER" />
+    <result column="quantity" property="quantity" jdbcType="INTEGER" />
+    <result column="transaction" property="transaction" jdbcType="INTEGER" />
+    <result column="sales" property="sales" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="thumbnails" property="thumbnails" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="table">
+    shopinformation
+  </sql>
+
+  <sql id="all" >
+    id, modified, name, level, remark, price, sort, display, quantity, transaction, sales,
+    uid, image,thumbnails
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" >
+    select 
+    <include refid="all" />
+    from <include refid="table"/>
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectTen" resultMap="BaseResultMap" >
+    select
+    <include refid="all" />
+    FROM <include refid="table"/>
+    where display = 1 order by id desc
+    limit #{start} , #{end}
+  </select>
+  <select id="selectOffShelf" resultMap="BaseResultMap">
+    select
+    <include refid="all" />
+    from <include refid="table"/>
+    where uid = #{0} and display = 0 order by id desc
+    limit #{1},10
+  </select>
+  <select id="getCountsOfShelf" resultType="java.lang.Integer" >
+    select count(id)
+    from <include refid="table"/>
+    where uid = #{uid,jdbcType=INTEGER} and display =0 order by id DESC
+  </select>
+  <select id="getCounts" resultType="java.lang.Integer">
+    select count(id)
+    from <include refid="table"/>
+    where display =1
+  </select>
+  <select id="selectIdByImage" resultType="java.lang.Integer">
+    select id
+    from <include refid="table"/>
+    where image = #{image,jdbcType=VARCHAR}
+    limit 1
+  </select>
+  <select id="selectByName" resultMap="BaseResultMap">
+    select
+    <include refid="all" />
+    from <include refid="table"/>
+    where name LIKE CONCAT('%',#{name},'%') order by id desc
+    limit 12
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from <include refid="table"/>
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wsk.pojo.ShopInformation" >
+    insert into <include refid="table"/> (id, modified, name,
+      level, remark, price, 
+      sort, display, quantity, 
+      transaction, sales, uid,
+      image,thumbnails)
+    values (#{id,jdbcType=INTEGER}, #{modified,jdbcType=TIMESTAMP}, #{name,jdbcType=VARCHAR},
+      #{level,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL},
+      #{sort,jdbcType=INTEGER}, #{display,jdbcType=INTEGER}, #{quantity,jdbcType=INTEGER},
+      #{transaction,jdbcType=INTEGER}, #{sales,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER},
+      #{image,jdbcType=VARCHAR}),#{thumbnails,jdbcType=VARCHAR}
+  </insert>
+  <insert id="insertSelective" parameterType="com.wsk.pojo.ShopInformation" >
+    insert into <include refid="table"/>
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="modified != null" >
+        modified,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="display != null" >
+        display,
+      </if>
+      <if test="quantity != null" >
+        quantity,
+      </if>
+      <if test="transaction != null" >
+        transaction,
+      </if>
+      <if test="sales != null" >
+        sales,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="image != null" >
+        image,
+      </if>
+      <if test="thumbnails!=null">
+        thumbnails,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="modified != null" >
+        #{modified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="display != null" >
+        #{display,jdbcType=INTEGER},
+      </if>
+      <if test="quantity != null" >
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="transaction != null" >
+        #{transaction,jdbcType=INTEGER},
+      </if>
+      <if test="sales != null" >
+        #{sales,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="image != null" >
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="thumbnails!=null">
+        #{thumbnails,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wsk.pojo.ShopInformation" >
+    update <include refid="table"/>
+    <set >
+      <if test="modified != null" >
+        modified = #{modified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="display != null" >
+        display = #{display,jdbcType=INTEGER},
+      </if>
+      <if test="quantity != null" >
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="transaction != null" >
+        transaction = #{transaction,jdbcType=INTEGER},
+      </if>
+      <if test="sales != null" >
+        sales = #{sales,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="image != null" >
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="thumbnails!=null">
+        thumbnails=#{thumbnails,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wsk.pojo.ShopInformation" >
+    update
+    <include refid="table"/>
+    set modified = #{modified,jdbcType=TIMESTAMP},
+      name = #{name,jdbcType=VARCHAR},
+      level = #{level,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      sort = #{sort,jdbcType=INTEGER},
+      display = #{display,jdbcType=INTEGER},
+      quantity = #{quantity,jdbcType=INTEGER},
+      transaction = #{transaction,jdbcType=INTEGER},
+      sales = #{sales,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=INTEGER},
+      image = #{image,jdbcType=VARCHAR},
+      thumbnails = #{thumbnails,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
