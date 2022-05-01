@@ -10,5 +10,4 @@ jdk1.8
 
 mysql5.7
 
-
 先在数据中创建名为c2c的数据库，使用Navicat for MySQL运行 c2c.sql文件创建表和导入数据

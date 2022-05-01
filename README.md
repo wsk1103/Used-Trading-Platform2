@@ -1,24 +1,24 @@
 # 基于SSM的校园二手交易平台
 
-http://120.79.21.204:8080/
-
 **完整的设计报告在后面**
 
 喜欢就点一下star哟，谢谢亲的支持  
-https://github.com/wsk1103/mySSM  
+https://github.com/wsk1103/Used-Trading-Platform2
 
 个人主页  
 https://wsk1103.github.io/
 
+使用 Spring Boot 一键式启动。
 
-Java版本：1.8   
-数据库：MySQL  
-框架：Spring + Spring MVC + MyBatis  
-服务器：Tomcat  
-前端解析框架：Thymeleaf  
-开发工具：Idea 2017  
-版本管理工具：Maven  
-版本控制工具：GitHub  
+下载项目，运行c2c.sql文件，然后运行 UsedTradingPlatformApplication.main 方法即可启动。
+
+环境
+
+jdk1.8
+
+mysql5.7
+
+先在数据中创建名为c2c的数据库，使用Navicat for MySQL运行 c2c.sql文件创建表和导入数据
 
 ## 3.2 实现过程
 ### 3.2.1 商品首页实现
@@ -83,25 +83,6 @@ Java版本：1.8
  ![这里写图片描述](https://img-blog.csdn.net/20180506142908919?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dzazExMDM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
  ![这里写图片描述](https://img-blog.csdn.net/20180506142916295?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dzazExMDM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
  ![这里写图片描述](https://img-blog.csdn.net/20180506142923392?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dzazExMDM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-
-
-搭建数据库
-MySQL
-driver=com.mysql.jdbc.Driver
-url=jdbc:mysql://localhost:3306/c2c
-username=root
-password=123456
-initiaSize=0
-maxActive=20
-maxIdle=20
-minIdle=1
-maxWait=60000
-、
-
-先在数据中创建名为c2c的数据库，使用Navicat for MySQL运行 c2c.sql文件创建表和导入数据
-
-将图片解压到任意一个盘，然后配置Tomcat，将图片路径引用到本地配置的图片路径下。  
-![这里写图片描述](https://img-blog.csdn.net/2018070112373963?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dzazExMDM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 
 
 # 一、设计概要
