@@ -2,6 +2,9 @@
 
 **完整的设计报告在后面**
 
+视频教程：<br>
+https://www.bilibili.com/video/BV1jc411H7aX/
+
 喜欢就点一下star哟，谢谢亲的支持  
 https://github.com/wsk1103/Used-Trading-Platform2
 
