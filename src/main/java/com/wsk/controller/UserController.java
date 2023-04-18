@@ -4,6 +4,7 @@ import cn.hutool.core.io.FileUtil;
 import com.wsk.bean.GoodsCarBean;
 import com.wsk.bean.ShopInformationBean;
 import com.wsk.bean.UserWantBean;
+import com.wsk.config.FileConfig;
 import com.wsk.pojo.*;
 import com.wsk.response.BaseResponse;
 import com.wsk.service.*;
@@ -11,8 +12,7 @@ import com.wsk.token.TokenProccessor;
 import com.wsk.tool.SaveSession;
 import com.wsk.tool.StringUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -69,6 +69,8 @@ public class UserController {
     private AllKindsService allKindsService;
     @Resource
     private ShopContextService shopContextService;
+    @Autowired
+    private FileConfig fileConfig;
 
     //进入登录界面
     @RequestMapping(value = "/login.do", method = RequestMethod.GET)
@@ -599,7 +601,7 @@ public class UserController {
                 return "redirect:publish_product.do?error=请插入图片";
             }
             String random;
-            String path = "D:\\", save;
+            String path = fileConfig.getFileSave() + ":\\", save;
             random = "toImage\\" + StringUtils.getInstance().getRandomChar() + System.currentTimeMillis() + ".jpg";
             StringBuilder thumbnails = new StringBuilder();
             thumbnails.append(path);
@@ -625,12 +627,6 @@ public class UserController {
             if (!OCR.isOk2(pornograp)) {
                 return "redirect:publish_product?error=图片不能含有敏感文字";
             }*/
-            //创建缩略图文件夹
-//            File thumbnailsFile = new File(thumbnails.toString());
-//            if (!thumbnailsFile.exists()) {
-//                FileUtil.mkdir(thumbnailsFile);
-////                thumbnailsFile.mkdir();
-//            }
             if (StringUtils.getInstance().thumbnails(path + random, thumbnails.toString())) {
                 save = "/toImage/thumbnails/" + wsk;
             } else {
