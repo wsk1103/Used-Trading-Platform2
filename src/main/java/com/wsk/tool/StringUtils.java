@@ -1,13 +1,9 @@
 package com.wsk.tool;
 
-import cn.hutool.core.io.FileUtil;
 import cn.hutool.crypto.digest.MD5;
 import net.coobird.thumbnailator.Thumbnails;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -138,11 +134,6 @@ public class StringUtils {
 //        stringBuilder.append(new Date().getTime());
 //        stringBuilder.append(".jpg");
         try {
-            //创建缩略图文件夹
-            File thumbnailsFile = new File(path);
-            if (!thumbnailsFile.exists()) {
-                FileUtil.mkdir(thumbnailsFile);
-            }
             Thumbnails.of(path).size(215, 229).toFile(save);
             return true;
         } catch (Exception e) {

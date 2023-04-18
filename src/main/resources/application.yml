@@ -41,4 +41,6 @@ logging:
 #  path: ./logs
 my:
   file:
+    saveImage: /toImage/
+    saveThumbnails: /toImage/thumbnails/
     save: D #文件保存的系统盘，例如D盘则为D，C盘则C
